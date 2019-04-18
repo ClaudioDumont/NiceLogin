@@ -1,0 +1,305 @@
+@import 'reset';
+
+// Mixins
+@mixin transition($property: all, $duration: 0.3s, $ease: cubic-bezier(0.175, 0.885, 0.32, 1.275)) {
+    -webkit-transition: $property $duration $ease;
+    -moz-transition: $property $duration $ease;
+    -o-transition: $property $duration $ease;
+    transition: $property $duration $ease;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+      -webkit-box-shadow:inset $top $left $blur $color;
+      -moz-box-shadow:inset $top $left $blur $color;
+      box-shadow:inset $top $left $blur $color;
+    } @else {
+      -webkit-box-shadow: $top $left $blur $color;
+      -moz-box-shadow: $top $left $blur $color;
+      box-shadow: $top $left $blur $color;
+    }
+}
+  
+// Tipografy
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,700');
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 10px 0 20px 0;
+}
+
+h2 {
+    @extend h1;
+    font-size: 24px;
+    letter-spacing: -1px;
+    margin-bottom: 5px;
+}
+
+ul {
+    margin: 35px -10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li {
+    margin: 5px;
+    padding: 10px 13px;
+    background: #eee;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+// Tipografy
+
+// Util
+* {
+    box-sizing: border-box;
+}
+
+.search-icon {
+    font-size: 2.5em;
+    display: inline-block;
+    width: 0.4em;
+    box-sizing: content-box;
+    height: 0.4em;
+    border: 0.1em solid #fff;
+    position: relative;
+    border-radius: 0.35em;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        right: -0.25em;
+        bottom: -0.1em;
+        border-width: 0;
+        background: #fff;
+        width: 0.35em;
+        height: 0.08em;
+        transform: rotate(45deg);
+    }
+}
+
+.input-default {
+    background:#eee;
+    border-radius: 5px;
+    padding: 20px 15px;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    color: #333;
+    font-size: 20px;
+    @include transition();
+    
+    &::placeholder {
+        color: #B0BEC5;
+    }
+
+    &:focus {
+        @include box-shadow(4px, 8px, 12px, rgba(0,0,0,0.35));
+        outline: none;
+    }
+}
+
+
+// Util
+
+body{
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+	height: 100vh;
+	margin: -20px 0 50px;
+}
+
+main {
+    max-width:1024px;
+}
+
+$containerWidth: 980px;
+$overlayContainerWidth: 290px;
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 40px;
+    width: calc(100% - #{$overlayContainerWidth});
+    transition: all 0.6s ease-in-out;
+    background: #fff;
+
+    &.cpf {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    &.cnpj {
+        opacity: 0;
+        z-index: 1;
+    }
+
+}
+
+.container {
+    width: $containerWidth;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+    @include box-shadow(0, 14px, 28px, rgba(0,0,0,0.25));
+
+    &.right-panel-active {
+
+        .overlay-container {
+            transform: translateX(calc(-#{$containerWidth} + #{$overlayContainerWidth}));
+
+            .overlay {
+                transform: translateX(50%);
+                background-position: left -80px bottom -10px;
+
+                .overlay-left {
+                    transform: translateX(0);
+                }
+        
+                .overlay-right {
+                    transform: translateX(-20%);
+                }
+            }
+        }
+
+
+        .form-container.cnpj {
+            transform: translateX(43%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.3s;
+        }
+
+
+        .form-container.cpf {
+            transform: translateX(100%);
+        }
+    }
+}
+
+@keyframes show {
+	0%, 29.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	70%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: calc(100% - #{$overlayContainerWidth});
+    width: $overlayContainerWidth;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+
+    .overlay {
+        background: #FF416C;
+        background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/866a8044940857.5822e4124e470.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 bottom;
+        color: #FFFFFF;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: all 0.6s ease-in-out;
+
+        &:before {
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4)
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+
+            &.overlay-left {
+                transform: translateX(-20%);
+            }
+    
+            &.overlay-right {
+                right: 0;
+                transform: translateX(0);
+            }
+        }
+    }
+}
+
+.input-data-container {
+    margin: 50px auto;
+    position: relative;
+    height: 65px;
+
+    input {
+        @extend .input-default;
+        position: absolute;
+        width: calc(100% - 20px);
+    }
+
+    button {
+        padding: 10px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        position: absolute;
+        right: 0;
+        top: calc(50% - 17.5px);
+        background: #000;
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+
+.info-container {
+    input {
+        @extend .input-default;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+        margin-top: 0;
+    }
+}
+
+
