@@ -1,2 +1,2 @@
-import { bro } from './bro';
+import { interfaceJS } from './interface';
 import './styles/main.scss';

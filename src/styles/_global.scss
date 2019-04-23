@@ -1,0 +1,89 @@
+// Mixins
+@mixin transition($property: all, $duration: 0.3s, $ease: cubic-bezier(0.175, 0.885, 0.32, 1.275)) {
+    -webkit-transition: $property $duration $ease;
+    -moz-transition: $property $duration $ease;
+    -o-transition: $property $duration $ease;
+    transition: $property $duration $ease;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+      -webkit-box-shadow:inset $top $left $blur $color;
+      -moz-box-shadow:inset $top $left $blur $color;
+      box-shadow:inset $top $left $blur $color;
+    } @else {
+      -webkit-box-shadow: $top $left $blur $color;
+      -moz-box-shadow: $top $left $blur $color;
+      box-shadow: $top $left $blur $color;
+    }
+}
+  
+
+@keyframes show {
+	0%, 29.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	70%, 100% {
+	    opacity: 1;
+		z-index: 5;
+	}
+}
+
+.input-default {
+  background:#eee;
+  border-radius: 5px;
+  padding: 15px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
+  color: #333;
+  font-size: 20px;
+  @include transition();
+  
+  &::placeholder {
+      color: #333;
+  }
+
+  &:focus {
+      @include box-shadow(4px, 8px, 12px, rgba(0,0,0,0.35));
+      outline: none;
+  }
+}
+
+button {
+  background: none;
+  color: #fff;
+  border: solid 3px #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px 33px;
+  margin-top: 20px;
+  @include transition();
+
+  &:hover {
+      background: rgba(0,0,0,0.7);
+      border-color: #56c20f;
+  }
+}
+
+body{
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+height: 100vh;
+margin: -20px 0 50px;
+}
+
+main {
+  max-width:1024px;
+}
+
+// Tipografy
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700');

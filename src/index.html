@@ -10,31 +10,56 @@
         <main>
                
                 <div class="container" id="container">
-                  <div class="form-container cpf">
-                    <h1>Novo Usuário</h1>
+                  <div class="form-container sign-up">
+                    <h1>Time to feel like home,</h1>
                     
+                    <form action="">
+                      <label for="">
+                        <input type="text" name="name" placeholder="Full Name">
+                      </label>
+                      <label for="">
+                          <input type="email" name="email" placeholder="E-mail">
+                      </label>
+                      <label for="">
+                          <input type="password" name="password" placeholder="Password">
+                      </label>
+                      <label for="">
+                          <input type="password" name="password" placeholder="Confirm Password">
+                      </label>
+                      <button>Sign in</button>
+                    </form>
                     
                   </div>
-                  <div class="form-container cnpj">
-                    <h1>Usuário cadastrado</h1>
-                    <div class="input-data-container"> 
-                      
-
-    
-                    </div>
+                  <div class="form-container sign-in">
+                    <h1>Welcome back,</h1>
+                    <form action="">
+                        <label for="">
+                          <input type="text" name="name" placeholder="Full Name">
+                        </label>
+                        <label for="">
+                            <input type="email" name="email" placeholder="E-mail">
+                        </label>
+                        <label for="">
+                            <input type="password" name="password" placeholder="Password">
+                        </label>
+                        <button>Sign up</button>
+                      </form>
                     
                   </div>
                   <div class="overlay-container">
                     <div class="overlay">
                       <div class="overlay-panel overlay-left"> 
-                            <button id="cnpjButton">Novo Usuário</button>
-                        
+                        <div class="info-container">
+                            <h3>New here?</h3>
+                            <p>Make your registration and find out what a great thing to do!</p>
+                            <button id="signInButton">Sign Up</button>
+                          </div>
                       </div>
                       <div class="overlay-panel overlay-right"> 
                         <div class="info-container filter">
-                            
-
-                            <button id="cpfButton">Usuário Cadastrado</button>
+                            <h3>One of us?</h3>
+                            <p>If you already have an account, please login, we miss you!</p>
+                            <button id="signUpButton">Sign In</button>
                         </div>
                       </div>
                     </div>
