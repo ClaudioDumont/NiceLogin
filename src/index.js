@@ -1,2 +1,4 @@
-import { interfaceJS } from './interface';
-import './styles/main.scss';
+import { main } from './interface'
+import './styles/main.scss'
+
+main()
