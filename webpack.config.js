@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
     module: {
@@ -53,6 +54,15 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        }),
+
+        new StyleLintPlugin({
+            configFile: '.stylelinttrc.json',
+            context: 'src/styles',
+            files: '**/*.scss',
+            failOnError: false,
+            quiet: false,
+          })
+
     ]
 }
